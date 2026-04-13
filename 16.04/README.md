@@ -231,107 +231,126 @@
 
 ## Решения к первым 10 заданиям:
 
-### Задача 1
-
 ```csharp
-// 1. Метод для суммирования двух чисел
-static int Sum(int a, int b)
+using System;
+
+namespace CSharpMethodsPractice
 {
-    return a + b;
-}
-```
+    public static class Solutions
+    {
+        // 13. Метод, определяющий, является ли число простым
+        public static bool IsPrime(int number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
 
-### Задача 2
+            var boundary = (int)Math.Floor(Math.Sqrt(number));
+            for (int i = 3; i <= boundary; i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+            return true;
+        }
 
-```csharp
-// 2. Метод для суммирования двух чисел
-static int Sum(int a, int b)
-{
-    return a + b;
-}
-```
+        // 22. Метод, который переворачивает строку
+        public static string ReverseString(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            char[] charArray = input.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
 
-### Задача 3
+        // 43. Метод поиска максимального элемента в массиве
+        public static int GetMax(int[] array)
+        {
+            if (array == null || array.Length == 0)
+                throw new ArgumentException("Массив не может быть пустым.");
+            
+            int max = array;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > max)
+                    max = array[i];
+            }
+            return max;
+        }
 
-```csharp
-// 3. Максимум из трех чисел
-static int MaxOfThree(int a, int b, int c)
-{
-    int max = a;
-    if (b > max) max = b;
-    if (c > max) max = c;
-    return max;
-}
-```
+        // 81. Метод Swap, меняющий местами два числа через ref
+        public static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
 
-### Задача 4
+        // 82. Метод деления, возвращающий частное и остаток через out
+        public static void Divide(int dividend, int divisor, out int quotient, out int remainder)
+        {
+            quotient = dividend / divisor;
+            remainder = dividend % divisor;
+        }
 
-```csharp
-// 4. Проверка четности
-static bool IsEven(int n)
-{
-    return n % 2 == 0;
-}
-```
+        // 101. Метод приветствия с необязательным параметром имени
+        public static string Greet(string name = "Гость")
+        {
+            return $"Здравствуйте, {name}!";
+        }
 
-### Задача 5
+        // 122. Рекурсивный метод для нахождения N-го числа Фибоначчи
+        public static int Fibonacci(int n)
+        {
+            if (n < 0) throw new ArgumentException("N не может быть отрицательным");
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
+        }
 
-```csharp
-// 5. Проверка четности
-static bool IsEven(int n)
-{
-    return n % 2 == 0;
-}
-```
+        // 161. Метод, возвращающий минимальное и максимальное значение массива в виде кортежа
+        public static (int Min, int Max) GetMinMax(int[] array)
+        {
+            if (array == null || array.Length == 0)
+                throw new ArgumentException("Массив пуст");
 
-### Задача 6
+            int min = array;
+            int max = array;
 
-```csharp
-// 6. Проверка четности
-static bool IsEven(int n)
-{
-    return n % 2 == 0;
-}
-```
+            foreach (int item in array)
+            {
+                if (item < min) min = item;
+                if (item > max) max = item;
+            }
 
-### Задача 7
+            return (min, max);
+        }
 
-```csharp
-// 7. Суммирование двух чисел
-static int Sum(int a, int b)
-{
-    return a + b;
-}
-```
+        // 186. Безопасное деление, проверяющее знаменатель на 0 (Guard Clause)
+        public static double SafeDivide(double numerator, double denominator)
+        {
+            // Guard Clause
+            if (denominator == 0)
+                throw new DivideByZeroException("Знаменатель не может быть равен нулю.");
 
-### Задача 8
+            return numerator / denominator;
+        }
+    }
 
-```csharp
-// 8. Метод, выводящий все числа в диапазоне от a до b
-static void PrintRange(int a, int b)
-{
-    for (int i = a; i <= b; i++)
-        Console.WriteLine(i);
-}
-```
+    // Класс для методов расширения
+    public static class StringExtensions
+    {
+        // 146. Метод расширения для string, считающий количество слов
+        public static int WordCount(this string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return 0;
 
-### Задача 9
-
-```csharp
-// 9. Суммирование двух чисел
-static int Sum(int a, int b)
-{
-    return a + b;
-}
-```
-
-### Задача 10
-
-```csharp
-// 10. Метод, выводящий все числа в диапазоне от a до b
-static void PrintRange(int a, int b)
-{
-    for (int i = a; i <= b; i++)
-        Console.WriteLine(i);
+            string[] words = text.Split(new char[] { ' ', '.', '?', '!', '\n', '\r', '\t' }, 
+                                        StringSplitOptions.RemoveEmptyEntries);
+            return words.Length;
+        }
+    }
 }
 ```
